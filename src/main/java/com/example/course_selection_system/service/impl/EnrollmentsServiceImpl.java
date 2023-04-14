@@ -43,12 +43,12 @@ public class EnrollmentsServiceImpl implements EnrollmentsService {
 		if (!StringUtils.hasText(reqStudent) || !StringUtils.hasText(reqCourseName)) {
 			return new EnrollmentsResponse("學生id或課程名稱不得為空。 ");
 		}
-
+		// 限制一個課程至多3人選修
 		if (enrollmentsDao.findByCourseName(reqCourseName).size() >= 3) {
-			return new EnrollmentsResponse(reqCourseName + "人數已滿。 ");
+			return new EnrollmentsResponse("課程" + reqCourseName + "人數已滿。 ");
 		}
 
-		// 建立選課編碼
+		// 建立本次選課編碼
 		String enrollmentId = reqStudent + "_" + reqCourseName;
 		// 判斷此學生有沒有選過這堂課
 		if (enrollmentsDao.existsById(enrollmentId)) {
@@ -73,12 +73,12 @@ public class EnrollmentsServiceImpl implements EnrollmentsService {
 						continue;
 					}
 					// 判斷時間是否重疊
-					// thisCourse:本次加選的課程 course資料庫取初的已選課程
+					// thisCourse:本次加選的課程 course資料庫取出的已選課程
 					if (thisCourse.getStartTime().compareTo(course.getEndTime()) <= 0
 							&& thisCourse.getEndTime().compareTo(course.getStartTime()) <= 0) {
 						continue;
 					}
-					return new EnrollmentsResponse(selectedCourse + "衝堂，無法加選");
+					return new EnrollmentsResponse(thisCourse + "和" + selectedCourse + "衝堂，無法加選");
 				}
 
 			}
@@ -107,8 +107,20 @@ public class EnrollmentsServiceImpl implements EnrollmentsService {
 
 	@Override
 	public EnrollmentsResponse delEnrollments(EnrollmentsRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+
+		if (request == null || request.getEnrollment() == null || request.getEnrollment().getStudentId() == null
+				|| request.getEnrollment().getCourseName() == null) {
+			return new EnrollmentsResponse("請重新確認輸入。");
+		}
+
+		String studentId = request.getEnrollment().getStudentId();
+		String courseName = request.getEnrollment().getCourseName();
+		String enrollmentId = studentId + "_" + courseName;
+		if (!enrollmentsDao.existsById(enrollmentId)) {
+			return new EnrollmentsResponse("查無此選課紀錄。");
+		}
+		enrollmentsDao.deleteById(enrollmentId);
+		return new EnrollmentsResponse("退選成功。");
 	}
 
 	@Override

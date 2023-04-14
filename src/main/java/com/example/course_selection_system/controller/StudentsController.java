@@ -11,6 +11,7 @@ import com.example.course_selection_system.entity.Students;
 import com.example.course_selection_system.service.ifs.StudentsService;
 import com.example.course_selection_system.vo.request.StudentsRequest;
 import com.example.course_selection_system.vo.response.StudentsResponse;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @RestController
@@ -38,6 +39,12 @@ public class StudentsController {
 	@PostMapping("/get_student")
 	public List<Students> getStudent() {
 		return studentsService.getStudents();
+	}
+	
+	@PostMapping("/get_enrollments_and_courses_by_student_id")
+	@JsonProperty("student_id")
+	public StudentsResponse getEnrollmentsAndCoursesByStudentId(@RequestBody String studentId) {
+		return studentsService.getEnrollmentsAndCoursesByStudentId(studentId);
 	}
 
 }

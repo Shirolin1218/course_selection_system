@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import com.example.course_selection_system.entity.Courses;
 import com.example.course_selection_system.entity.Enrollments;
 import com.example.course_selection_system.entity.Students;
+import com.example.course_selection_system.repository.CoursesDao;
 import com.example.course_selection_system.repository.EnrollmentsDao;
 import com.example.course_selection_system.repository.StudentsDao;
 import com.example.course_selection_system.service.ifs.StudentsService;
@@ -25,16 +27,20 @@ public class StudentsServiceImpl implements StudentsService {
 	@Autowired
 	private EnrollmentsDao enrollmentsDao;
 
+	@Autowired
+	private CoursesDao coursesDao;
+
 	@Override
 	public StudentsResponse newStudent(StudentsRequest request) {
+
+		if (request == null || CollectionUtils.isEmpty(request.getStudentList())) {
+			return new StudentsResponse("請重新確認輸入。");
+		}
 
 		List<Students> reqList = request.getStudentList();
 		List<Students> errorList = new ArrayList<>();
 		String errorMessage = "";
 
-		if (CollectionUtils.isEmpty(reqList)) {
-			return new StudentsResponse("請重新確認輸入。");
-		}
 		for (Students item : reqList) {
 			String reqId = item.getId();
 			String reqName = item.getName();
@@ -61,12 +67,13 @@ public class StudentsServiceImpl implements StudentsService {
 
 	@Override
 	public StudentsResponse updateStudent(StudentsRequest request) {
+		if (request == null || CollectionUtils.isEmpty(request.getStudentList())) {
+			return new StudentsResponse("請重新確認輸入。");
+		}
 		List<Students> reqList = request.getStudentList();
 		List<Students> errorList = new ArrayList<>();
 		String errorMessage = "";
-		if (CollectionUtils.isEmpty(reqList)) {
-			return new StudentsResponse("請重新確認輸入。");
-		}
+
 		for (Students item : reqList) {
 			String reqId = item.getId();
 			String reqName = item.getName();
@@ -85,6 +92,7 @@ public class StudentsServiceImpl implements StudentsService {
 		if (!CollectionUtils.isEmpty(errorList)) {
 			return new StudentsResponse(errorList, "發生錯誤 " + errorMessage);
 		}
+
 		studentsDao.saveAll(reqList);
 		return new StudentsResponse(reqList, "更新成功。");
 	}
@@ -127,6 +135,20 @@ public class StudentsServiceImpl implements StudentsService {
 	@Override
 	public List<Students> getStudents() {
 		return studentsDao.findAll();
+	}
+
+	@Override
+	public StudentsResponse getEnrollmentsAndCoursesByStudentId(String studentId) {
+
+		Students reqStudent = studentsDao.findById(studentId).get();
+		List<List<Courses>> selectedCoursesList = new ArrayList<>();
+
+		List<Enrollments> reqEnrollmentList = enrollmentsDao.findByStudentId(studentId);
+		for (Enrollments reqEnrollment : reqEnrollmentList) {
+			selectedCoursesList.add(coursesDao.findByName(reqEnrollment.getCourseName()));
+		}
+
+		return new StudentsResponse(reqStudent, selectedCoursesList, "取得學號:" + studentId + " 的已選課程資料");
 	}
 
 }

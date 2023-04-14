@@ -16,4 +16,6 @@ public interface StudentsService {
 
 	public List<Students> getStudents();
 
+	StudentsResponse getEnrollmentsAndCoursesByStudentId(String studentId);
+
 }

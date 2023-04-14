@@ -37,6 +37,11 @@ public class CoursesServiceImpl implements CoursesService {
 		for (Courses item : reqList) {
 			String reqId = item.getId();
 			String reqName = item.getName();
+//			item.getStartTime();
+//			item.getEndTime();
+//			item.getWeek();
+//			item.getCredit();
+
 			if (!StringUtils.hasText(reqName) || !StringUtils.hasText(reqId)) {
 				errorMessage = errorMessage + "id或姓名不得為空。 ";
 				errorList.add(item);
@@ -47,6 +52,24 @@ public class CoursesServiceImpl implements CoursesService {
 				errorList.add(item);
 				continue;
 			}
+			// 判斷星期，設定為1~7，以外的數字為格式錯誤。
+			if (item.getWeek() < 1 || item.getWeek() > 7) {
+				errorMessage = errorMessage + reqId + "星期設定錯誤。 ";
+				errorList.add(item);
+				continue;
+			}
+			if (item.getStartTime() == null || item.getEndTime() == null
+					|| item.getStartTime().compareTo(item.getEndTime()) < 0) {
+				errorMessage = errorMessage + reqId + "時間設定錯誤。 ";
+				errorList.add(item);
+				continue;
+			}
+			if (item.getCredit() < 1 || item.getCredit() > 3) {
+				errorMessage = errorMessage + reqId + "學號設定錯誤。 ";
+				errorList.add(item);
+				continue;
+			}
+
 		}
 		if (!errorList.isEmpty()) {
 			return new CoursesResponse(errorList, "發生錯誤 " + errorMessage);
@@ -76,7 +99,23 @@ public class CoursesServiceImpl implements CoursesService {
 				errorMessage = errorMessage + reqId + "不存在。 ";
 				errorList.add(item);
 				continue;
+			}// 判斷星期，設定為1~7，以外的數字為格式錯誤。
+			if (item.getWeek() < 1 || item.getWeek() > 7) {
+				errorMessage = errorMessage + reqId + "星期設定錯誤。 ";
+				errorList.add(item);
+				continue;
 			}
+			if (item.getStartTime() == null || item.getEndTime() == null
+					|| item.getStartTime().compareTo(item.getEndTime()) < 0) {
+				errorMessage = errorMessage + reqId + "時間設定錯誤。 ";
+				errorList.add(item);
+				continue;
+			}
+			if (item.getCredit() < 1 || item.getCredit() > 3) {
+				errorMessage = errorMessage + reqId + "學號設定錯誤。 ";
+				errorList.add(item);
+				continue;
+			}		
 		}
 		if (!CollectionUtils.isEmpty(errorList)) {
 			return new CoursesResponse(errorList, "發生錯誤 " + errorMessage);

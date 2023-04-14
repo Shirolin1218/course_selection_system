@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "courses")
 public class Courses {
@@ -18,8 +20,10 @@ public class Courses {
 	@Column(name = "week") // 1~7代表星期一到星期日
 	private int week;
 	@Column(name = "start_time") // 課堂開始時間
+	@JsonProperty("start_time")
 	private Time startTime;
 	@Column(name = "end_time") // 課堂結束時間
+	@JsonProperty("end_time")
 	private Time endTime;
 	@Column(name = "credit") // 課堂學分
 	private int credit;
