@@ -44,12 +44,25 @@ public class StudentsServiceImpl implements StudentsService {
 		for (Students item : reqList) {
 			String reqId = item.getId();
 			String reqName = item.getName();
+			// 學生id格式限制為1個大寫英文字加上7個數字
+			String patternId = "[A-Z]\\d{7}";
+
 			if (!StringUtils.hasText(reqName) || !StringUtils.hasText(reqId)) {
 				errorMessage = errorMessage + "id或姓名不得為空。 ";
 				errorList.add(item);
 				continue;
 			}
 
+			if (!reqId.matches(patternId)) {
+				errorMessage = errorMessage + "id格式錯誤。 ";
+				errorList.add(item);
+				continue;
+			}
+			if (reqName.length() > 40) {
+				errorMessage = errorMessage + "名稱過長。 ";
+				errorList.add(item);
+				continue;
+			}
 			if (studentsDao.existsById(reqId)) {
 				errorMessage = errorMessage + reqId + "已存在。 ";
 				errorList.add(item);
@@ -61,6 +74,7 @@ public class StudentsServiceImpl implements StudentsService {
 		if (!CollectionUtils.isEmpty(errorList)) {
 			return new StudentsResponse(errorList, "發生錯誤 " + errorMessage);
 		}
+
 		studentsDao.saveAll(reqList);
 		return new StudentsResponse(reqList, "新增成功");
 	}
@@ -120,13 +134,16 @@ public class StudentsServiceImpl implements StudentsService {
 				errorList.add(item);
 				continue;
 			}
+			// 待刪除的選課紀錄List
 			enrollmentsDelList.add(enrollmentsDao.findByStudentId(reqId));
-//			if (enrollmentsDao.existsById(reqId)) {// 先刪除此學生id的選課資料
-//				enrollmentsDao.deleteById(reqId);
-//			}
+
 		}
 		if (!CollectionUtils.isEmpty(errorList)) {
 			return new StudentsResponse(errorList, "發生錯誤 " + errorMessage);
+		}
+		// 先刪除此學生id的選課資料
+		for (List<Enrollments> delList : enrollmentsDelList) {
+			enrollmentsDao.deleteAll(delList);
 		}
 		studentsDao.deleteAll(reqList);
 		return new StudentsResponse(reqList, "刪除成功。");

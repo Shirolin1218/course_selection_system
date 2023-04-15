@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.example.course_selection_system.entity.Courses;
 import com.example.course_selection_system.entity.Students;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class StudentsResponse {
 
 	@JsonProperty("student_list")

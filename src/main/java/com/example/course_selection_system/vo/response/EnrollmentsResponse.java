@@ -1,16 +1,13 @@
 package com.example.course_selection_system.vo.response;
 
-import com.example.course_selection_system.entity.Courses;
-import com.example.course_selection_system.entity.Students;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class EnrollmentsResponse {
 
 	private String studentId;
 
 	private String courseName;
-	
-	private Students students;
-	private Courses courses;
 
 	private String message;
 

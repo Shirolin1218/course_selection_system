@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import com.example.course_selection_system.entity.Courses;
 import com.example.course_selection_system.entity.Enrollments;
 import com.example.course_selection_system.repository.CoursesDao;
 import com.example.course_selection_system.repository.EnrollmentsDao;
+import com.example.course_selection_system.repository.StudentsDao;
 import com.example.course_selection_system.service.ifs.EnrollmentsService;
 import com.example.course_selection_system.vo.request.EnrollmentsRequest;
 import com.example.course_selection_system.vo.response.EnrollmentsResponse;
@@ -23,6 +25,9 @@ public class EnrollmentsServiceImpl implements EnrollmentsService {
 
 	@Autowired
 	private CoursesDao coursesDao;
+
+	@Autowired
+	private StudentsDao studentDao;
 
 	@Override
 	public EnrollmentsResponse newEnrollments(EnrollmentsRequest request) {
@@ -42,6 +47,14 @@ public class EnrollmentsServiceImpl implements EnrollmentsService {
 
 		if (!StringUtils.hasText(reqStudent) || !StringUtils.hasText(reqCourseName)) {
 			return new EnrollmentsResponse("學生id或課程名稱不得為空。 ");
+		}
+		// 判斷此學生id是否存在
+		if (!studentDao.existsById(reqStudent)) {
+			return new EnrollmentsResponse("學生id不存在。 ");
+		}
+		// 判斷課程名稱是否存在
+		if (CollectionUtils.isEmpty(coursesDao.findByName(reqCourseName))) {
+			return new EnrollmentsResponse("課程不存在。 ");
 		}
 		// 限制一個課程至多3人選修
 		if (enrollmentsDao.findByCourseName(reqCourseName).size() >= 3) {
