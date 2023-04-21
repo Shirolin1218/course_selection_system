@@ -17,9 +17,9 @@ public class EnrollmentsController {
 
 	@Autowired
 	private EnrollmentsService enrollmentsService;
-	
+
 	@PostMapping("/new_enrollment")
-	public EnrollmentsResponse newCourse(@RequestBody EnrollmentsRequest request) {
+	public EnrollmentsResponse newEnrollment(@RequestBody EnrollmentsRequest request) {
 		return enrollmentsService.newEnrollments(request);
 	}
 
@@ -29,12 +29,12 @@ public class EnrollmentsController {
 //	}
 
 	@PostMapping("/delete_enrollment")
-	public EnrollmentsResponse delCourse(@RequestBody EnrollmentsRequest request) {
+	public EnrollmentsResponse delEnrollment(@RequestBody EnrollmentsRequest request) {
 		return enrollmentsService.delEnrollments(request);
 	}
 
 	@PostMapping("/get_enrollment")
-	public List<Enrollments> getCourses() {
+	public List<Enrollments> getEnrollment() {
 		return enrollmentsService.getEnrollments();
 	}
 }

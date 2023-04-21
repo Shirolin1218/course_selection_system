@@ -23,10 +23,10 @@ public class CoursesController {
 		return coursesService.newCourse(request);
 	}
 
-	@PostMapping("/update_course")
-	public CoursesResponse updateCourse(@RequestBody CoursesRequest request) {
-		return coursesService.updateCourse(request);
-	}
+//	@PostMapping("/update_course")
+//	public CoursesResponse updateCourse(@RequestBody CoursesRequest request) {
+//		return coursesService.updateCourse(request);
+//	}
 
 	@PostMapping("/delete_course")
 	public CoursesResponse delCourse(@RequestBody CoursesRequest request) {

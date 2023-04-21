@@ -1,16 +1,30 @@
 package com.example.course_selection_system.vo.request;
 
-import com.example.course_selection_system.entity.Enrollments;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EnrollmentsRequest {
 
-	private Enrollments enrollment;
+	@JsonProperty("student_id")
+	private String studentId;
 
-	public Enrollments getEnrollment() {
-		return enrollment;
+	@JsonProperty("course_list")
+	private List<String> courseList;
+
+	public List<String> getCourseList() {
+		return courseList;
 	}
 
-	public void setEnrollment(Enrollments enrollment) {
-		this.enrollment = enrollment;
+	public void setCourseList(List<String> courseList) {
+		this.courseList = courseList;
+	}
+
+	public String getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
 	}
 }

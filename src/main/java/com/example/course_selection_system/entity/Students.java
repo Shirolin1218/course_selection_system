@@ -5,8 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name = "students")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Students {
 	@Id
 	@Column(name = "id")

@@ -7,10 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "courses")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Courses {
 	@Id
 	@Column(name = "id") // 課堂代號

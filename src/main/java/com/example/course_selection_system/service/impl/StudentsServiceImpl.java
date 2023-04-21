@@ -2,6 +2,7 @@ package com.example.course_selection_system.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,7 +55,7 @@ public class StudentsServiceImpl implements StudentsService {
 			}
 
 			if (!reqId.matches(patternId)) {
-				errorMessage = errorMessage + "id格式錯誤。 ";
+				errorMessage = errorMessage + "id:" + reqId + " 格式錯誤。 ";
 				errorList.add(item);
 				continue;
 			}
@@ -157,7 +158,11 @@ public class StudentsServiceImpl implements StudentsService {
 	@Override
 	public StudentsResponse getEnrollmentsAndCoursesByStudentId(String studentId) {
 
-		Students reqStudent = studentsDao.findById(studentId).get();
+		Optional<Students> reqStudentOp = studentsDao.findById(studentId);
+		if (!reqStudentOp.isPresent()) {
+			return new StudentsResponse("學號:" + studentId + "不存在");
+		}
+		Students reqStudent = reqStudentOp.get();
 		List<List<Courses>> selectedCoursesList = new ArrayList<>();
 
 		List<Enrollments> reqEnrollmentList = enrollmentsDao.findByStudentId(studentId);
