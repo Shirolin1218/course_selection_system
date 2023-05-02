@@ -15,4 +15,8 @@ public interface CoursesService {
 	public CoursesResponse delCourse(CoursesRequest request);
 
 	public List<Courses> getCourses();
+
+	public List<Courses> findCoursesByName(String courseName);
+	
+	public List<Courses> findCoursesByCourseId(String courseId);
 }

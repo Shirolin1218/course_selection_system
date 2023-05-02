@@ -11,12 +11,9 @@ public class CoursesRequest {
 	List<Courses> courseList;
 
 	public CoursesRequest() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public CoursesRequest(List<Courses> courseList) {
-		super();
 		this.courseList = courseList;
 	}
 

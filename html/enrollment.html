@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>enrollment</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header>
+        <a href="./index.html" class="icon"></a>
+        <h1>加退選</h1>
+        <div class="login-box">
+            <p class="login-check">尚未登入</p>
+            <button class="logout-btn btn btn-primary">登出</button>
+        </div>
+    </header>
+    <div class="container m-3 d-flex justify-content-around">
+        <div class="input-box">
+            <div class="inputbox d-flex  align-items-center">
+                <label for="id-input">Student ID</label>
+                <input type="text" class="id-input m-2" placeholder="ex:A0000000">
+            </div>
+
+            <div class="course-box inputbox d-flex  align-items-center">
+                <label for="id-input">課程</label>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <div class="selected-course-box card-body">
+                <p class="selected-course-name">已選課程名稱</p>
+                <p class="selected-course-credit">學分:</p>
+                <p class="selected-course-time">課程時間:</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="btn-area m-3 d-flex justify-content-evenly">
+        <button type="button" class="create-btn btn btn-primary">加選</button>
+        <button type="button" class="del-btn btn btn-primary">退選</button>
+    </div>
+    <div class="information">
+        <div class="container">
+            <div class="row ">
+                <div class="col">
+                    學生id
+                </div>
+                <div class="col">
+                    學生姓名
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    課程id
+                </div>
+                <div class="col">
+                    課程名稱
+                </div>
+                <div class="col">
+                    上課星期
+                </div>
+                <div class="col">
+                    開始時間
+                </div>
+                <div class="col">
+                    結束時間
+                </div>
+                <div class="col">
+                    學分
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/enrollment.js"></script>
+</body>
+
+</html>

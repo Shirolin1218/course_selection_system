@@ -15,8 +15,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Courses {
 	@Id
-	@Column(name = "id") // 課堂代號
-	private String id;
+	@Column(name = "course_id") // 課堂
+	@JsonProperty("course_id")
+	private String courseId;
 	@Column(name = "name") // 課堂名稱
 	private String name;
 	@Column(name = "week") // 1~7代表星期一到星期日
@@ -31,13 +32,10 @@ public class Courses {
 	private int credit;
 
 	public Courses() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Courses(String id, String name, int week, Time startTime, Time endTime, int credit) {
-		super();
-		this.id = id;
+	public Courses(String courseId, String name, int week, Time startTime, Time endTime, int credit) {
+		this.courseId = courseId;
 		this.name = name;
 		this.week = week;
 		this.startTime = startTime;
@@ -45,12 +43,12 @@ public class Courses {
 		this.credit = credit;
 	}
 
-	public String getId() {
-		return id;
+	public String getCourseId() {
+		return courseId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
 	}
 
 	public String getName() {

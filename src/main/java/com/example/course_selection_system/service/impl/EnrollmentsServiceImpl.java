@@ -175,10 +175,12 @@ public class EnrollmentsServiceImpl implements EnrollmentsService {
 
 	@Override
 	public EnrollmentsResponse delEnrollments(EnrollmentsRequest request) {
+
 		if (request == null || request.getCourseList() == null || request.getStudentId() == null) {
 			return new EnrollmentsResponse("請重新確認輸入。");
 		}
 		String studentId = request.getStudentId();
+		String errormessage = "";
 		List<String> delCourseList = request.getCourseList();
 		List<Enrollments> selectedList = enrollmentsDao.findByStudentId(studentId);
 		if (CollectionUtils.isEmpty(selectedList)) {
@@ -197,13 +199,16 @@ public class EnrollmentsServiceImpl implements EnrollmentsService {
 			}
 			// 若遍歷時delCourseList有任何selectedList沒有的課程名稱則回傳
 			if (!contain) {
-				return new EnrollmentsResponse("清單中包含沒有選修的課程");
+				errormessage += "你未選修" + delCourse + "課程。 ";
 			}
 			contain = false;
 		}
 		// 比較已選清單是否包含待刪除清單的所有項目
 		if (!selectedList.containsAll(delEnrollmentList)) {
-			return new EnrollmentsResponse("刪除名單中有未選修的課程");
+			return new EnrollmentsResponse("刪除名單中有未選修的課程。 ");
+		}
+		if (StringUtils.hasText(errormessage)) {
+			return new EnrollmentsResponse(errormessage);
 		}
 		enrollmentsDao.deleteAll(delEnrollmentList);
 		return new EnrollmentsResponse("退選成功。");

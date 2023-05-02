@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>course</title>
+    <!-- icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header>
+        <a href="./index.html" class="icon"></a>
+    </header>
+    <div class="container">
+        <!-- <select>
+            <option value="">請選擇ID</option>
+            <option value="">ex1</option>
+            <option value="">ex2</option>
+        </select> -->
+        <div class="input-area">
+            <label for="id-input">
+                Course ID
+            </label>
+            <div class="inputbox id-box">
+                <input type="text" class="id-input" placeholder="ex.Math1001">
+            </div>
+            <label for="name-input">
+                Course Name
+            </label>
+            <div class="inputbox">
+                <input type="text" class="name-input" placeholder="請輸入課程名稱">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <label for="week-input">
+                Course Week
+            </label>
+            <div class="inputbox">
+                <input type="number" class="week-input" placeholder="1~7">
+            </div>
+            <label for="start-input">
+                Course Start Time
+            </label>
+            <div class="inputbox">
+                <input type="time" class="start-input" value="08:00:00">
+            </div>
+            <label for="end-input">
+                Course End Time
+            </label>
+            <div class="inputbox">
+                <input type="time" class="end-input" value="17:50:00">
+            </div>
+            <label for="credit-input">
+                Course Credit
+            </label>
+            <div class="inputbox">
+                <input type="number" class="credit-input" placeholder="1~3">
+            </div>
+        </div>
+        <div class="btn-area mt-3 d-flex justify-content-evenly">
+            <button type="button" class="create-btn btn btn-primary">新增</button>
+            <button type="button" class="del-btn btn btn-primary">刪除</button>
+        </div>
+
+    </div>
+    <script src="./js/course.js"></script>
+</body>
+
+</html>

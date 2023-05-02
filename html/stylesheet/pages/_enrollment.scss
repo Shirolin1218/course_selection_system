@@ -1,0 +1,15 @@
+.row {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+
+    .col {
+        border-style: outset;
+        border-width: 1px;
+        border-color: black;
+    }
+}
+
+.selected-course-time {
+    white-space: pre-line;
+}

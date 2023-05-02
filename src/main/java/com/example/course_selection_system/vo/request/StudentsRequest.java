@@ -11,11 +11,9 @@ public class StudentsRequest {
 	private List<Students> studentList;
 
 	public StudentsRequest() {
-		super();
 	}
 
 	public StudentsRequest(List<Students> studentList) {
-		super();
 		this.studentList = studentList;
 	}
 

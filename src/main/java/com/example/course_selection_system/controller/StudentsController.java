@@ -3,6 +3,8 @@ package com.example.course_selection_system.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +15,7 @@ import com.example.course_selection_system.vo.request.StudentsRequest;
 import com.example.course_selection_system.vo.response.StudentsResponse;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
+@CrossOrigin
 @RestController
 public class StudentsController {
 
@@ -36,7 +38,7 @@ public class StudentsController {
 		return studentsService.delStudent(request);
 	}
 
-	@PostMapping("/get_student")
+	@GetMapping("/get_student")
 	public List<Students> getStudent() {
 		return studentsService.getStudents();
 	}

@@ -55,7 +55,7 @@ public class StudentsServiceImpl implements StudentsService {
 			}
 
 			if (!reqId.matches(patternId)) {
-				errorMessage = errorMessage + "id:" + reqId + " 格式錯誤。 ";
+				errorMessage = errorMessage + "id" + " 格式錯誤。 ";
 				errorList.add(item);
 				continue;
 			}
