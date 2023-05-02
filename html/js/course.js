@@ -21,7 +21,11 @@ fetch("http://localhost:8080/get_course")
         console.log(data);
         courseList = data;
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+        console.log(error);
+        alert(error);
+        alert("取得課程資料失敗");
+    });
 
 idInput.addEventListener("input", input => {
     const inputValue = input.target.value;
@@ -147,12 +151,16 @@ createBtn.addEventListener("click", function () {
             console.log(data);
             alert(data.message);
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error);
+            alert(error);
+            alert("新增失敗。");
+        })
 
 });
 
 delBtn.addEventListener("click", function () {
-    
+
     let body;
     //確認課程id欄位
     body = {
@@ -189,7 +197,11 @@ delBtn.addEventListener("click", function () {
                 console.log(data);
                 alert(data.message);
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                alert(error);
+                alert("新增失敗。");
+            })
 
     } else {
         console.log("cancel");

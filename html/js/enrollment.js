@@ -101,7 +101,11 @@ createBtn.addEventListener("click", function () {
             console.log(data);
             alert(data.message);
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+            alert(error);
+            alert("加選失敗。");
+        })
 });
 
 delBtn.addEventListener("click", function () {
@@ -129,7 +133,11 @@ delBtn.addEventListener("click", function () {
                 console.log(data);
                 alert(data.message);
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                alert(error);
+                alert("退選失敗。");
+            })
     } else {
         console.log("cancel");
         console.log(body.course_list[0]);
@@ -152,7 +160,11 @@ function getDataByStudentId() {
             console.log(data);
             return data;
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+            console.log(error)
+            alert(error);
+            alert("取得選課資料失敗");
+        });
 }
 
 function getCourseList() {
@@ -162,7 +174,11 @@ function getCourseList() {
             .then(data => {
                 resolve(data);
             })
-            .catch(error => reject(error));
+            .catch(error => {
+                reject(error)
+                alert(error);
+                alert("取得選課資料失敗");
+            });
     });
 }
 
