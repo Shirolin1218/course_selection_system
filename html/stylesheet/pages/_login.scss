@@ -1,0 +1,87 @@
+
+.input-area {
+    margin-top: 8px;
+    width: 100%;
+
+    .inputbox {
+        display: flex;
+        position: relative;
+
+        input {
+            margin-top: 8px;
+            width: 100%;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        i {
+            position: absolute;
+            right: 10px;
+            top: 40%;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+
+}
+
+
+.check {
+    margin-top: 16px;
+    display: flex;
+
+    .checkbox {
+        align-items: center;
+
+        button {
+            font-size: 24px;
+        }
+    }
+
+    button {
+        margin-left: auto;
+        border-radius: 5px;
+        padding: 4px 5%;
+        box-shadow: 2px 2px 2px 0;
+
+        &:active {
+            transform: scale(0.9);
+        }
+
+        &:hover {
+            background-color: darkseagreen;
+            cursor: pointer;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+    }
+}
+
+.login {
+    margin-top: 16px;
+    text-align: center;
+    width: 100%;
+
+    button {
+        font-size: 20px;
+        border-radius: 5px;
+        padding: 4px 12px;
+        box-shadow: 2px 2px 2px 0;
+
+        &:active {
+            transform: scale(0.9);
+        }
+
+        &:hover {
+            background-color: darkseagreen;
+            cursor: pointer;
+        }
+    }
+}
