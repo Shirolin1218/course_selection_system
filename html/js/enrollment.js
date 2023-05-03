@@ -103,8 +103,7 @@ createBtn.addEventListener("click", function () {
         })
         .catch(error => {
             console.log(error)
-            alert(error);
-            alert("加選失敗。");
+            alert("加選失敗。" + error);
         })
 });
 
@@ -135,8 +134,7 @@ delBtn.addEventListener("click", function () {
             })
             .catch(error => {
                 console.log(error);
-                alert(error);
-                alert("退選失敗。");
+                alert("退選失敗。" + error);
             })
     } else {
         console.log("cancel");
@@ -161,9 +159,8 @@ function getDataByStudentId() {
             return data;
         })
         .catch(error => {
-            console.log(error)
-            alert(error);
-            alert("取得選課資料失敗");
+            console.log(error);
+            alert("取得選課資料失敗。" + error);
         });
 }
 
@@ -176,15 +173,13 @@ function getCourseList() {
             })
             .catch(error => {
                 reject(error)
-                alert(error);
-                alert("取得選課資料失敗");
+                alert("取得選課資料失敗" + error);
             });
     });
 }
 
 
 function useCourseListCreateSelect() {
-
     getCourseList().then(courseList => {
         //生成選項欄位
         const defaultOption = document.createElement("option")
@@ -202,5 +197,4 @@ function useCourseListCreateSelect() {
         });
         courseBox.appendChild(selectCourseList);
     })
-
 }

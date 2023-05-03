@@ -1,20 +1,14 @@
 const idBox = document.querySelector(".id-box")
 const idInput = document.querySelector(".id-input");
-const nameInput = document.querySelector(".name-input")
-const weekInput = document.querySelector(".week-input")
-const startInput = document.querySelector(".start-input")
-const endInput = document.querySelector(".end-input")
-const creditInput = document.querySelector(".credit-input")
-const createBtn = document.querySelector(".create-btn")
-const delBtn = document.querySelector(".del-btn")
-
-
-
+const nameInput = document.querySelector(".name-input");
+const weekInput = document.querySelector(".week-input");
+const startInput = document.querySelector(".start-input");
+const endInput = document.querySelector(".end-input");
+const creditInput = document.querySelector(".credit-input");
+const createBtn = document.querySelector(".create-btn");
+const delBtn = document.querySelector(".del-btn");
 
 let courseList;
-
-
-
 fetch("http://localhost:8080/get_course")
     .then(response => response.json())
     .then(data => {
@@ -23,8 +17,7 @@ fetch("http://localhost:8080/get_course")
     })
     .catch(error => {
         console.log(error);
-        alert(error);
-        alert("取得課程資料失敗");
+        alert("與伺服器連接異常。" + error);
     });
 
 idInput.addEventListener("input", input => {
@@ -105,7 +98,6 @@ nameInput.addEventListener("change", input => {
                 weekInput.value = null;
                 creditInput.value = null
             }
-
         });
     } else {
         inputCourse = null;
@@ -199,8 +191,7 @@ delBtn.addEventListener("click", function () {
             })
             .catch(error => {
                 console.log(error);
-                alert(error);
-                alert("新增失敗。");
+                alert("新增失敗。" + error);
             })
 
     } else {

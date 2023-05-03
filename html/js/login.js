@@ -32,8 +32,7 @@ loginBtn.addEventListener("click", function () {
         })
         .catch(error => {
             console.error(error);
-            alert(error);
-            alert("與伺服器連線中斷。");
+            alert("與伺服器連線中斷。" + error);
         })
 });
 

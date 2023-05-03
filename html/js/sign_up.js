@@ -50,7 +50,6 @@ signUpBtn.addEventListener("click", function () {
         })
         .catch(error => {
             console.log(error);
-            alert(error);
-            alert("註冊失敗");
+            alert("註冊失敗。" + error);
         })
 })
