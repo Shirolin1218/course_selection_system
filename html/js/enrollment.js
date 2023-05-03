@@ -67,7 +67,7 @@ selectCourseList.addEventListener("change", function () {
 logoutBtn.addEventListener("click", function () {
     if (window.confirm("確定要登出?")) {
         localStorage.removeItem("userId");
-        window.location.href = "./index.html";
+        window.location.href = "../index.html";
     } else {
         return;
     }
